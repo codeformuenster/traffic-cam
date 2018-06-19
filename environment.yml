@@ -1,0 +1,9 @@
+name: traffic-cam
+dependencies:
+- python=3.6
+- opencv
+- matplotlib
+- pip
+- pip:
+  - selectivesearch
+  - pylab

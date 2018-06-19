@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 
-img = cv2.imread('../data/2018-03-20T19:27:17+0000.png')
+img = cv2.imread('data/2018-03-20T19:27:17+0000.png')
 pylab.imshow(img)
 pylab.show()
 
