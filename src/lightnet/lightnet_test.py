@@ -6,7 +6,7 @@ model = lightnet.load('yolo')
 image = lightnet.Image.from_bytes(open('angela.jpg', 'rb').read())
 boxes = model(image)
 
-items = { 'person': 2 }
+items = {}
 for box in boxes:
     item = box[1]
     if not item in items.keys():
