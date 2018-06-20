@@ -4,6 +4,7 @@ dependencies:
 - opencv
 - matplotlib
 - pip
+- flake8
 - pip:
   - selectivesearch
   - pylab
