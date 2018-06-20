@@ -5,6 +5,8 @@ dependencies:
 - matplotlib
 - pip
 - flake8
+- libgcc
 - pip:
+  - cython
   - selectivesearch
-  - pylab
+  - lightnet
