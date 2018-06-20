@@ -42,4 +42,3 @@ for x, y, w, h in candidates:
     ax.add_patch(rect)
 
 plt.show()
-
