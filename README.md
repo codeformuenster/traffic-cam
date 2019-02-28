@@ -2,8 +2,21 @@
 
 Object detection, applied to public images from the city of Münster.
 
-
 ## Getting started
+
+### Download some images
+
+1. Open stream with mplayer (alternatively, use VLC player)
+
+```
+cd data
+mplayer -fs -vf screenshot -playlist https://56f2a99952126.streamlock.net/833/default.stream/playlist.m3u8
+```
+
+2. Press 's' key to take screenshots.
+
+
+### Object detection
 
 1. Build conda envitonment: ```conda env create -f environment.yml```
 
