@@ -9,4 +9,5 @@ dependencies:
 - pip:
   - cython
   - selectivesearch
-  - lightnet
+  - yolo34py
+

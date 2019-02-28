@@ -12,3 +12,6 @@ lightnet
 # python
 .vscode
 __pycache__
+
+# pycharm
+.idea

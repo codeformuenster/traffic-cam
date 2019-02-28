@@ -1,4 +1,4 @@
-# REGION SELECTION
+"""Using selective search to identify regions of interest (potential objects)"""
 
 import selectivesearch
 import cv2
