@@ -18,7 +18,7 @@ mplayer -fs -vf screenshot -playlist https://56f2a99952126.streamlock.net/833/de
 
 ### Object detection
 
-1. Build conda envitonment: ```conda env create -f environment.yml```
+1. Build conda environment: ```conda env create -f environment.yml```
 
 2. Download yolo weights: ```bash src/02_download_yolo.sh```
 
