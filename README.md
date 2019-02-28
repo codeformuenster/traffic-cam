@@ -1,5 +1,8 @@
 # YOLO demo of Prinzipalmarkt
 
+Object detection, applied to public images from the city of Münster.
+
+
 ## Getting started
 
 1. Build conda envitonment: ```conda env create -f environment.yml```
