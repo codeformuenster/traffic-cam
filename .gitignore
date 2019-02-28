@@ -1,6 +1,5 @@
 # downloaded data
-# data/*
-lightnet
+data/*
 
 # R
 .Rhistory
@@ -15,3 +14,7 @@ __pycache__
 
 # pycharm
 .idea
+
+# yolo
+cfg/
+weights/
