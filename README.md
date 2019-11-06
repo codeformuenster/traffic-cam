@@ -2,6 +2,12 @@
 
 Object detection, applied to public images from the city of Münster.
 
+## Object detection
+
+https://cdn-images-1.medium.com/max/1600/1*Hz6t-tokG1niaUfmcysusw.jpeg
+
+Webcam Example: https://codesandbox.io/s/z364noozrm
+
 ## Getting started
 
 ### Download some images
