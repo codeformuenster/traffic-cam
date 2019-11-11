@@ -1,12 +1,14 @@
 name: traffic-cam
 dependencies:
-- python=3.6
-- opencv
-- matplotlib
-- pip
-- flake8
-- libgcc
-- pip:
-  - cython
-  - selectivesearch
-  - yolo34py
+  - python=3.6
+  - pip
+  - pip:
+    - opencv-python
+    - numpy
+    - yolo34py  # requires pkg-config, e.g. 'sudo apt install pkg-config#'
+    - matplotlib
+    # dev
+    - black
+    - jupyter
+    - pylama
+    - rope
