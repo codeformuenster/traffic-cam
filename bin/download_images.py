@@ -10,15 +10,22 @@ from traffic_cam import io
 logging.basicConfig(level=logging.INFO)
 
 # config
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    "n_images", help="number of images to download", type=int, default=15
+parser = argparse.ArgumentParser(
+    description="Download images from live webcam to file.",
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 )
 parser.add_argument(
-    "sleep", help="number of seconds to sleep between downloads", type=int, default=15
+    "-n ", "--n_images", help="number of images to download", type=int, default=15,
 )
-args = parser.parse_args()
+parser.add_argument(
+    "-s",
+    "--sleep",
+    help="number of seconds to sleep between downloads",
+    type=int,
+    default=15,
+)
 
+args = parser.parse_args()
 logging.info(f"args.n_images: {args.n_images}")
 logging.info(f"args.sleep: {args.sleep}")
 
