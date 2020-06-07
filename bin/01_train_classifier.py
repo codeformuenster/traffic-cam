@@ -8,7 +8,7 @@ from traffic_cam import classifier, paths
 
 # data generators for training and validation
 train_generator = classifier.get_image_datagen(folder=paths.TRAIN_DIR, batch_size=16)
-valid_generator = classifier.get_image_datagen(folder=paths.VALID_DIR, batch_size=3)
+valid_generator = classifier.get_image_datagen(folder=paths.VALID_DIR, batch_size=16)
 
 # train model
 model = classifier.get_classifier(n_classes=5)
@@ -23,7 +23,7 @@ model.fit(
 
 # save class encoding from data generators
 assert train_generator.class_indices == valid_generator.class_indices
-with open(str(paths.CLASSIFIER_HDF5), "w") as f:
+with open(str(paths.CLASSES_JSON), "w") as f:
     f.write(json.dumps(train_generator.class_indices, indent=2))
 
 # save model

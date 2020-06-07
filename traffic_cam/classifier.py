@@ -1,13 +1,20 @@
 """ Utils for classifier model. """
 
+import json
 from pathlib import Path
+from typing import Dict
 
+import numpy as np
 from tensorflow.keras.applications.mobilenet import preprocess_input
 from tensorflow.keras.applications import MobileNet
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
 from tensorflow.keras.models import Model
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from keras_preprocessing.image.directory_iterator import DirectoryIterator
+from tensorflow.keras.preprocessing import image
+
+
+from traffic_cam import paths
 
 
 def get_classifier(n_classes: int) -> Model:
@@ -51,3 +58,24 @@ def get_image_datagen(folder: Path, batch_size: int) -> DirectoryIterator:
         shuffle=True,
     )
     return generator
+
+
+def classify_image(filepath: Path, model: Model) -> np.ndarray:
+    # preprocess image
+    img = image.load_img(str(filepath), target_size=(224, 224))
+    x = image.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    x = preprocess_input(x)
+    # predict with model
+    return model.predict(x)
+
+
+def load_class_indices() -> Dict[str, int]:
+    with open(paths.CLASSES_JSON, "r") as f:
+        classes: Dict[str, int] = json.loads(f.read())
+    return classes
+
+
+def get_predicted_class(predictions: np.ndarray) -> str:
+    classes = load_class_indices()
+    return list(classes.keys())[np.argmax(predictions)]
