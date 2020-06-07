@@ -1,5 +1,6 @@
 """ Utils for IO. """
 
+import argparse
 import datetime
 import subprocess
 
@@ -11,3 +12,21 @@ def download_frame():
     -vframes 1 \
     data/image_{timestamp}.jpg"""
     subprocess.run(download_command.split(), check=True)
+
+
+def get_download_argparser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Download images from live webcam to file.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument(
+        "-n ", "--n_images", help="number of images to download", type=int, default=15,
+    )
+    parser.add_argument(
+        "-s",
+        "--sleep",
+        help="number of seconds to sleep between downloads",
+        type=int,
+        default=15,
+    )
+    return parser
