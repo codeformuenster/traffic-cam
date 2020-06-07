@@ -8,6 +8,7 @@ setup(
     license="MIT",
     packages=find_packages(),
     scripts=glob("bin/*"),
-    install_requires=[],
+    install_requires=["tensorflow==2.1.1",
+                      "Pillow"],
     extras_require={"dev": ["black", "flake8", "rope"]},
 )
