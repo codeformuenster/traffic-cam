@@ -1,19 +1,14 @@
 # downloaded data
 data/*
 
-# R
-.Rhistory
-.Rapp.history
-.RData
-.Rproj.user
-*.Rproj
+# IDEs
+.vscode
+.idea
 
 # python
-.vscode
 __pycache__
-
-# pycharm
-.idea
+*.egg-info
+/env
 
 # yolo
 cfg/
