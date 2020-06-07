@@ -3,6 +3,7 @@
 import argparse
 import time
 import logging
+from subprocess import CalledProcessError
 
 from traffic_cam import io
 
@@ -32,7 +33,11 @@ logging.info(f"args.sleep: {args.sleep}")
 # download images
 for i in range(args.n_images):
     logging.info(f"Download image {i + 1} of {args.n_images}...")
-    io.download_frame()
+    try:
+        io.download_frame()
+    except CalledProcessError as e:
+        logging.error(f"Failed to download frame: {e}")
+        continue
     logging.info(f"Sleeping {args.sleep} seconds...")
     time.sleep(args.sleep)
 
