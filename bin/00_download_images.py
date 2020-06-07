@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ Download a number of images """
 
 import argparse
