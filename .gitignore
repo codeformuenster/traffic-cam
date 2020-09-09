@@ -1,5 +1,6 @@
-# downloaded data
-data/*
+# data
+data/
+output/
 
 # IDEs
 .vscode

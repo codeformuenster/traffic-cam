@@ -1,20 +1,17 @@
 #!/usr/bin/env bash
+# based on CLI instructions at https://pjreddie.com/darknet/yolo/
 
-echo "Downloading config files..."
+# setup darknet
+git clone https://github.com/pjreddie/darknet
+cd darknet
+make
+cd ..
 
-mkdir cfg
-wget -O cfg/coco.data https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/coco.data
-wget -O cfg/yolov3.cfg https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolov3.cfg
+# download model
+wget -c -O data/yolo/yolov3.weights https://pjreddie.com/media/files/yolov3.weights
 
-echo "Modify config parameters to enable Testing mode"
-sed -i '/batch=64/c\# batch=64' cfg/yolov3.cfg
-sed -i '/subdivisions=16/c\# subdivisions=16' cfg/yolov3.cfg
-sed -i '/# batch=1/c\batch=1' cfg/yolov3.cfg
-sed -i '/# subdivisions=1/c\subdivisions=1' cfg/yolov3.cfg
-
-mkdir data
-wget -O data/coco.names https://raw.githubusercontent.com/pjreddie/darknet/master/data/coco.names
-
-echo "Downloading yolov3 weights"
-mkdir weights
-wget -O weights/yolov3.weights https://pjreddie.com/media/files/yolov3.weights
+# copy artifacts to run detection with yolo
+mkdir -p cfg
+cp darknet/cfg/coco.data cfg/.
+cp darknet/data/coco.names data/.
+cp -r darknet/data/labels data/.
