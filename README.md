@@ -6,6 +6,10 @@ https://cdn-images-1.medium.com/max/1600/1*Hz6t-tokG1niaUfmcysusw.jpeg
 
 Webcam Example: https://codesandbox.io/s/z364noozrm
 
+## Dependencies
+
+* ffmpeg (e.g. install with apt-get)
+
 ## Getting started
 
 ### Download some images
@@ -28,7 +32,7 @@ Webcam Example: https://codesandbox.io/s/z364noozrm
     source activate traffic-cam
     ```
 
-2. Download Yolo weights: 
+2. Download Yolo weights:
 
     ```bash
     bash src/02_download_yolo.sh

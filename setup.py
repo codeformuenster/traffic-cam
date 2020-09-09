@@ -13,7 +13,6 @@ setup(
         "Pillow",
         "opencv-python",
         "numpy",
-        # "yolo34py",  # requires pkg-config, e.g. 'sudo apt install pkg-config#'
         "matplotlib",
         # dev
         "black",
