@@ -25,7 +25,8 @@ for i in range(args.n_images):
     # download image
     logging.info(f"Download image {i + 1} of {args.n_images}...")
     try:
-        io.download_frame()
+        timestamp = io.get_timestamp_isoformat()
+        io.download_frame(suffix=timestamp)
     except CalledProcessError as e:
         logging.error(f"Failed to download frame: {e}")
         continue

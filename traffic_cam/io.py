@@ -9,8 +9,7 @@ def get_timestamp_isoformat() -> str:
     return datetime.datetime.utcnow().isoformat() + "+00:00"
 
 
-def download_frame():
-    suffix = get_timestamp_isoformat()
+def download_frame(suffix: str):
     download_command = f"""ffmpeg \
     -i https://5f27cc8163c2e.streamlock.net/833/default.stream/playlist.m3u8?wowzatokenhash=0mfLM7iDsbsXsvj91j1LqHWRrf2ZMRArPtr8efxJnjU= \
     -vframes 1 \
