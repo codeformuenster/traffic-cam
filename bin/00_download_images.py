@@ -16,6 +16,7 @@ logging.basicConfig(level=logging.INFO)
 args = io.get_download_argparser().parse_args()
 logging.info(f"args.n_images: {args.n_images}")
 logging.info(f"args.sleep: {args.sleep}")
+logging.info(f"args.classify: {args.classify}")
 
 if args.classify:
     model = load_model(str(paths.CLASSIFIER_HDF5))
