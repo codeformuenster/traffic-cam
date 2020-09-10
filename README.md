@@ -1,45 +1,27 @@
-# YOLO demo of Prinzipalmarkt
+# Observing traffic in the City of Muenster
 
-Object detection, applied to public images from the city of Münster.
-
-https://cdn-images-1.medium.com/max/1600/1*Hz6t-tokG1niaUfmcysusw.jpeg
-
-Webcam Example: https://codesandbox.io/s/z364noozrm
+Image classification and object detection, applied to a public webcam in the city of Münster.
 
 ## Dependencies
 
+* Debian-based operating system
 * ffmpeg (e.g. install with apt-get)
 
 ## Getting started
 
-### Download some images
-
-1. Open stream with mplayer (alternatively, use VLC player)
+1. Create and activate virtual environment. For example with `conda`:
 
     ```bash
-    cd data
-    mplayer -fs -vf screenshot -playlist https://56f2a99952126.streamlock.net/833/default.stream/playlist.m3u8
+    conda env create -n cam python=3.7
+    conda activate cam
     ```
 
-2. Press 's' key to take screenshots.
-
-### Object detection
-
-1. Build and activate conda environment:
+2. Install Python dependencies and `traffic-cam` package (with virtual environment activated):
 
     ```bash
-    conda env create -f environment.yml
-    source activate traffic-cam
+    pip install -r requirements.txt
+    pip install .
     ```
 
-2. Download Yolo weights:
-
-    ```bash
-    bash src/02_download_yolo.sh
-    ```
-
-3. Run Yolo demo:
-
-    ```bash
-    python -m src.03_yolo
-    ```
+3. Run scripts in `bin/` in their numerical order.
+    This includes downloading images, training a classifier, and counting persons.
