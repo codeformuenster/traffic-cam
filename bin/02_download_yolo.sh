@@ -8,7 +8,7 @@ make
 cd ..
 
 # download model
-wget -c -O data/yolo/yolov3.weights https://pjreddie.com/media/files/yolov3.weights
+wget -c -O cfg/yolov3.weights https://pjreddie.com/media/files/yolov3.weights
 
 # copy artifacts to run detection with yolo
 mkdir -p cfg

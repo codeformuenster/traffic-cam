@@ -4,12 +4,12 @@ import shutil
 import subprocess
 from pathlib import Path
 
-IMG_PATH = Path("data/shot0004.jpg")
+IMG_PATH = Path("data/valid/3/shot0004.jpg")
 YOLO_CMD = [
     "./darknet/darknet",
     "detect",
     "darknet/cfg/yolov3.cfg",
-    "data/yolo/yolov3.weights",
+    "cfg/yolov3.weights",
 ]
 
 # run detection
