@@ -17,33 +17,6 @@ def download_frame(suffix: str):
     subprocess.run(download_command.split(), check=True)
 
 
-def get_download_argparser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Download images from live webcam to file.",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
-    parser.add_argument(
-        "-n ", "--n_images", help="number of images to download", type=int, default=15,
-    )
-    parser.add_argument(
-        "-s",
-        "--sleep",
-        help="number of seconds to sleep between downloads",
-        type=int,
-        default=15,
-    )
-    parser.add_argument(
-        "-c",
-        "--classify",
-        type=str2bool,
-        nargs='?',
-        const=True,
-        default=False,
-        help="Classify downloaded images, and sort them to training set.",
-    )
-    return parser
-
-
 def str2bool(value: str) -> bool:
     if isinstance(value, bool):
         return value

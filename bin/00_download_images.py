@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Download a number of images """
 
+import argparse
 import logging
 import shutil
 import time
@@ -13,7 +14,30 @@ from traffic_cam import io, paths, classifier
 logging.basicConfig(level=logging.INFO)
 
 # parse terminal args
-args = io.get_download_argparser().parse_args()
+parser = argparse.ArgumentParser(
+    description="Download images from live webcam to file.",
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+)
+parser.add_argument(
+    "-n ", "--n_images", help="number of images to download", type=int, default=15,
+)
+parser.add_argument(
+    "-s",
+    "--sleep",
+    help="number of seconds to sleep between downloads",
+    type=int,
+    default=15,
+)
+parser.add_argument(
+    "-c",
+    "--classify",
+    type=io.str2bool,
+    nargs='?',
+    const=True,
+    default=False,
+    help="Classify downloaded images, and sort them to training set.",
+)
+args = parser.parse_args()
 logging.info(f"args.n_images: {args.n_images}")
 logging.info(f"args.sleep: {args.sleep}")
 logging.info(f"args.classify: {args.classify}")
