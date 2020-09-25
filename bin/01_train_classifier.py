@@ -2,11 +2,12 @@
 """ Train image classifier to distinguish camera positions. """
 
 import json
+import os
+
 from tensorflow.keras.applications.mobilenet import preprocess_input
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 from traffic_cam import classifier, paths
-
 
 SEED = 42
 VALIDATION_SPLIT = 0.3
@@ -37,7 +38,8 @@ valid_generator = datagen.flow_from_directory(
 
 
 # train model
-model = classifier.get_classifier(n_classes=5)
+n_classes = len(os.listdir(paths.TRAIN_DIR))
+model = classifier.get_classifier(n_classes=n_classes)
 
 step_size_train = train_generator.n // train_generator.batch_size
 model.fit(
