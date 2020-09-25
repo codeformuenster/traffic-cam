@@ -3,8 +3,7 @@
 from pathlib import Path
 
 DATA_DIR = Path("data/")
-TRAIN_DIR = Path("data/") / "train"
-VALID_DIR = Path("data/") / "valid"
+TRAIN_DIR = DATA_DIR / "train"
 
 CLASSIFIER_DIR = Path("data/classifier/")
 CLASSIFIER_HDF5 = CLASSIFIER_DIR / "model.hdf5"

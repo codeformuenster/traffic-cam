@@ -9,8 +9,6 @@ from tensorflow.keras.applications.mobilenet import preprocess_input
 from tensorflow.keras.applications import MobileNet
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
 from tensorflow.keras.models import Model
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from keras_preprocessing.image.directory_iterator import DirectoryIterator
 from tensorflow.keras.preprocessing import image
 
 
@@ -45,19 +43,6 @@ def get_classifier(n_classes: int) -> Model:
         optimizer="Adam", loss="categorical_crossentropy", metrics=["accuracy"]
     )
     return model
-
-
-def get_image_datagen(folder: Path, batch_size: int) -> DirectoryIterator:
-    datagen = ImageDataGenerator(preprocessing_function=preprocess_input)
-    generator = datagen.flow_from_directory(
-        str(folder),
-        target_size=(224, 224),
-        color_mode="rgb",
-        batch_size=16,
-        class_mode="categorical",
-        shuffle=True,
-    )
-    return generator
 
 
 def classify_image(filepath: Path, model: Model) -> np.ndarray:

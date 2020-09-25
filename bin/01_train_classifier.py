@@ -4,11 +4,38 @@
 import json
 import os
 
+from tensorflow.keras.applications.mobilenet import preprocess_input
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
 from traffic_cam import classifier, paths
 
+SEED = 42
+VALIDATION_SPLIT = 0.3
+
 # data generators for training and validation
-train_generator = classifier.get_image_datagen(folder=paths.TRAIN_DIR, batch_size=16)
-valid_generator = classifier.get_image_datagen(folder=paths.VALID_DIR, batch_size=16)
+datagen = datagen = ImageDataGenerator(
+    preprocessing_function=preprocess_input, validation_split=VALIDATION_SPLIT
+)
+train_generator = datagen.flow_from_directory(
+    paths.TRAIN_DIR,
+    seed=SEED,
+    target_size=(224, 224),
+    color_mode="rgb",
+    batch_size=16,
+    class_mode="categorical",
+    shuffle=True,
+    subset="training",
+)
+valid_generator = datagen.flow_from_directory(
+    paths.TRAIN_DIR,
+    target_size=(224, 224),
+    color_mode="rgb",
+    batch_size=16,
+    class_mode="categorical",
+    shuffle=True,
+    subset="validation",
+)
+
 
 # train model
 n_classes = len(os.listdir(paths.TRAIN_DIR))
