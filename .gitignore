@@ -1,0 +1,16 @@
+# data
+data/
+output/
+
+# IDEs
+.vscode
+.idea
+
+# python
+__pycache__
+*.egg-info
+/env
+
+# yolo
+cfg/
+weights/
