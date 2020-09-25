@@ -63,8 +63,9 @@ for i in range(args.n_images):
         predictions = classifier.classify_image(filepath=source_path, model=model)
         predicted_class: str = classifier.get_predicted_class(predictions=predictions)
         logging.info(f"Sorting new image to class {predicted_class}.")
-        target_path = paths.TRAIN_DIR / predicted_class / filename
-        shutil.move(source_path, target_path)
+        target_dir = paths.TRAIN_DIR / predicted_class
+        target_dir.mkdir(parents=True, exist_ok=True)
+        shutil.move(source_path, target_dir / filename)
     # sleep
     logging.info("Sleeping...")
     time.sleep(args.sleep)
