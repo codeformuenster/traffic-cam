@@ -27,7 +27,7 @@ sudo apt install ffmpeg
 
     ```bash
     pip install -r requirements.txt
-    pip install .
+    pip install -e .
     ```
 
 3. Run scripts in `bin/` in their numerical order.
