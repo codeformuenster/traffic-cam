@@ -14,6 +14,7 @@ setup(
         "opencv-python",
         "numpy",
         "matplotlib",
+        "wget",
         # dev
         "black",
         "flake8",

@@ -103,6 +103,7 @@ urllib3==1.25.10          # via requests
 wcwidth==0.2.5            # via prompt-toolkit
 webencodings==0.5.1       # via bleach
 werkzeug==1.0.1           # via tensorboard
+wget==3.2                 # via traffic_cam (setup.py)
 wheel==0.35.1             # via tensorboard, tensorflow
 widgetsnbextension==3.5.1  # via ipywidgets
 wrapt==1.12.1             # via tensorflow
