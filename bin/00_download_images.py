@@ -43,7 +43,7 @@ logging.info(f"args.sleep: {args.sleep}")
 logging.info(f"args.classify: {args.classify}")
 
 
-paths.create_paths_if_not_exists()
+paths.create_paths_if_not_exist()
 
 
 if args.classify:
