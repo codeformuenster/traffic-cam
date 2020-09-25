@@ -6,14 +6,14 @@ import matplotlib.pyplot as plt
 
 # handle command line arguments
 ap = argparse.ArgumentParser()
-ap.add_argument('-i', '--image', required=True,
-                help='path to input image')
-ap.add_argument('-c', '--config', required=True,
-                help='path to yolo config file')
-ap.add_argument('-w', '--weights', required=True,
-                help='path to yolo pre-trained weights')
-ap.add_argument('-cl', '--classes', required=True,
-                help='path to text file containing class names')
+ap.add_argument("-i", "--image", required=True, help="path to input image")
+ap.add_argument("-c", "--config", required=True, help="path to yolo config file")
+ap.add_argument(
+    "-w", "--weights", required=True, help="path to yolo pre-trained weights"
+)
+ap.add_argument(
+    "-cl", "--classes", required=True, help="path to text file containing class names"
+)
 args = ap.parse_args()
 
 # read input image
@@ -26,7 +26,7 @@ scale = 0.00392
 
 # read class names from text file
 classes = None
-with open(args.classes, 'r') as f:
+with open(args.classes, "r") as f:
     classes = [line.strip() for line in f.readlines()]
 
 # generate different colors for different classes
@@ -54,6 +54,7 @@ def get_output_layers(net):
     output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
     return output_layers
+
 
 # function to draw bounding box on the detected object with class name
 
@@ -120,26 +121,36 @@ for i in indices:
 
     # print(str(classes[class_ids[i]]))
 
-    draw_bounding_box(image, class_ids[i], confidences[i], round(x), round(y), round(x + w), round(y + h))
+    draw_bounding_box(
+        image,
+        class_ids[i],
+        confidences[i],
+        round(x),
+        round(y),
+        round(x + w),
+        round(y + h),
+    )
 
 # display output image
 
 
 print(n_person)
 
-#lt.figure(figsize=(10, 8))
+# lt.figure(figsize=(10, 8))
 plt.axis("off")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), interpolation='nearest', aspect='auto')
+plt.imshow(
+    cv2.cvtColor(image, cv2.COLOR_BGR2RGB), interpolation="nearest", aspect="auto"
+)
 
 plt.savefig("T1.jpg")
 
-#cv2.imshow("object detection", image)
+# cv2.imshow("object detection", image)
 
 # wait until any key is pressed
 # cv2.waitKey()
 
 # save output image to disk
-#cv2.imwrite("object-detection.jpg", image)
+# cv2.imwrite("object-detection.jpg", image)
 
 # release resources
 # cv2.destroyAllWindows()
