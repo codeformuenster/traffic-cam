@@ -1,8 +1,9 @@
 # import required packages
-import cv2
 import argparse
-import numpy as np
+
+import cv2
 import matplotlib.pyplot as plt
+import numpy as np
 
 # handle command line arguments
 ap = argparse.ArgumentParser()
