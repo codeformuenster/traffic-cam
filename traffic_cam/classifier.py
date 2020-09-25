@@ -8,6 +8,7 @@ import numpy as np
 from tensorflow.keras.applications.mobilenet import preprocess_input
 from tensorflow.keras.applications import MobileNet
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
+from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import Model
 from tensorflow.keras.preprocessing import image
 
@@ -15,16 +16,16 @@ from tensorflow.keras.preprocessing import image
 from traffic_cam import paths
 
 
-def get_classifier(n_classes: int) -> Model:
+def get_classifier(n_classes: int, learning_rate: float) -> Model:
     # build model
     base_model = MobileNet(
         weights="imagenet", include_top=False
     )  # imports the mobilenet model and discards the last 1000 neuron layer.
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
-    x = Dense(1024, activation="relu")(
-        x
-    )  # we add dense layers so that the model can learn more complex functions and classify for better results.
+    # we add dense layers so that the model can learn more complex functions
+    # and classify for better results.
+    x = Dense(1024, activation="relu")(x)
     x = Dense(1024, activation="relu")(x)  # dense layer 2
     x = Dense(512, activation="relu")(x)  # dense layer 3
     preds = Dense(n_classes, activation="softmax")(
@@ -39,9 +40,8 @@ def get_classifier(n_classes: int) -> Model:
         layer.trainable = True
 
     # compile
-    model.compile(
-        optimizer="Adam", loss="categorical_crossentropy", metrics=["accuracy"]
-    )
+    opt = Adam(learning_rate=learning_rate)
+    model.compile(optimizer=opt, loss="categorical_crossentropy", metrics=["accuracy"])
     return model
 
 
