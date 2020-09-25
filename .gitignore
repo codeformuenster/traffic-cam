@@ -15,4 +15,4 @@ __pycache__
 cfg/
 weights/
 
-darknet
+darknet/
