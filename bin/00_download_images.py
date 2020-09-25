@@ -42,6 +42,10 @@ logging.info(f"args.n_images: {args.n_images}")
 logging.info(f"args.sleep: {args.sleep}")
 logging.info(f"args.classify: {args.classify}")
 
+
+paths.create_paths_if_not_exists()
+
+
 if args.classify:
     model = load_model(str(paths.CLASSIFIER_HDF5))
 
