@@ -7,8 +7,12 @@ See webcam data source [here](https://www.blick.ms/webcam-auf-dem-prinzipalmarkt
 
 ## Dependencies
 
-* Debian-based operating system
-* ffmpeg (e.g. install with apt-get)
+* Tested on `Ubuntu 20.04`
+* `ffmpeg`, e.g. on Ubuntu install with:
+
+```bash
+sudo apt install ffmpeg
+```
 
 ## Getting started
 
