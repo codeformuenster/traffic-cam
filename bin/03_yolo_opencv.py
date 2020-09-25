@@ -1,41 +1,37 @@
-# import required packages
-import argparse
+"""
+Counting persons with YOLO.
+Based on: https://www.arunponnusamy.com/yolo-object-detection-opencv-python.html
+"""
 
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
 
-# handle command line arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True, help="path to input image")
-ap.add_argument("-c", "--config", required=True, help="path to yolo config file")
-ap.add_argument(
-    "-w", "--weights", required=True, help="path to yolo pre-trained weights"
-)
-ap.add_argument(
-    "-cl", "--classes", required=True, help="path to text file containing class names"
-)
-args = ap.parse_args()
+from traffic_cam import paths
 
 # read input image
-image = cv2.imread(args.image)
+# TODO: download new image, within which to count people
+image_path = Path("data/train/south_street_cityhall/image_2020-09-10T07:43:44.868929+00:00.jpg")
+image = cv2.imread(str(image_path))
 
+# dimensions of original images (for drawing bounding boxes)
 Width = image.shape[1]
 Height = image.shape[0]
-scale = 0.00392
+scale = 0.00392  # TODO: what does this parameter tune?
 
 # read class names from text file
 classes = None
-with open(args.classes, "r") as f:
+with open(str(paths.YOLO_CLASSES), "r") as f:
     classes = [line.strip() for line in f.readlines()]
 
 # generate different colors for different classes
 COLORS = np.random.uniform(0, 255, size=(len(classes), 3))
 
 # read pre-trained model and config file
-net = cv2.dnn.readNet(args.weights, args.config)
+net = cv2.dnn.readNet(str(paths.YOLO_WEIGHTS), str(paths.YOLO_CFG))
 
-# load network
+# load YOLO model
 blob = cv2.dnn.blobFromImage(image, scale, (416, 416), (0, 0, 0), True, crop=False)
 net.setInput(blob)
 
@@ -77,7 +73,7 @@ outs = net.forward(get_output_layers(net))
 class_ids = []
 confidences = []
 boxes = []
-conf_threshold = 0.5
+conf_threshold = 0.3
 nms_threshold = 0.4
 
 # for each detetion from each output layer
@@ -129,25 +125,12 @@ for i in indices:
         round(y + h),
     )
 
-# display output image
-print(person_count)
-# lt.figure(figsize=(10, 8))
+print(f"Number on persons: {person_count}")
+
+# save image
 plt.axis("off")
+# TODO: use better interpolation
 plt.imshow(
     cv2.cvtColor(image, cv2.COLOR_BGR2RGB), interpolation="nearest", aspect="auto"
 )
-plt.savefig("T1.jpg")
-
-# cv2.imshow("object detection", image)
-
-# wait until any key is pressed
-# cv2.waitKey()
-
-# save output image to disk
-# cv2.imwrite("object-detection.jpg", image)
-
-# release resources
-# cv2.destroyAllWindows()
-
-# https://www.arunponnusamy.com/yolo-object-detection-opencv-python.html
-# python yolo_opencv.py --image "data/image_2020-09-25T10:11:10.353738+00:00.jpg" --config "darknet/cfg/yolov3.cfg" --weights "cfg/yolov3.weights" --classes "darknet/data/coco.names"
+plt.savefig(paths.OUTPUT_DIR / image_path.name)
