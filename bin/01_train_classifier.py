@@ -28,6 +28,7 @@ train_generator = datagen.flow_from_directory(
 )
 valid_generator = datagen.flow_from_directory(
     paths.TRAIN_DIR,
+    seed=SEED,
     target_size=(224, 224),
     color_mode="rgb",
     batch_size=16,
@@ -45,7 +46,7 @@ step_size_train = train_generator.n // train_generator.batch_size
 model.fit(
     x=train_generator,
     steps_per_epoch=step_size_train,
-    epochs=10,
+    epochs=30,
     validation_data=next(valid_generator),
 )
 
