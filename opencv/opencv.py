@@ -24,7 +24,6 @@ Width = image.shape[1]
 Height = image.shape[0]
 scale = 0.00392
 
-
 # read class names from text file
 classes = None
 with open(args.classes, "r") as f:
@@ -36,45 +35,43 @@ COLORS = np.random.uniform(0, 255, size=(len(classes), 3))
 # read pre-trained model and config file
 net = cv2.dnn.readNet(args.weights, args.config)
 
-# (416, 416)
-
-# create input blob
+# load network
 blob = cv2.dnn.blobFromImage(image, scale, (416, 416), (0, 0, 0), True, crop=False)
-
-# set input blob for the network
 net.setInput(blob)
-
-# function to get the output layer names
-# in the architecture
 
 
 def get_output_layers(net):
-
+    """get the output layer names in the architecture
+    Args:
+        net ([type]): [description]
+    Returns:
+        [type]: [description]
+    """
     layer_names = net.getLayerNames()
-
     output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-
     return output_layers
 
 
-# function to draw bounding box on the detected object with class name
-
-
 def draw_bounding_box(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
-
+    """draw bounding box on the detected object with class name
+    Args:
+        img ([type]): [description]
+        class_id ([type]): [description]
+        confidence ([type]): [description]
+        x ([type]): [description]
+        y ([type]): [description]
+        x_plus_w ([type]): [description]
+        y_plus_h ([type]): [description]
+    """
     label = str(classes[class_id])
-
     color = COLORS[class_id]
-
     cv2.rectangle(img, (x, y), (x_plus_w, y_plus_h), color, 2)
-
     cv2.putText(img, label, (x - 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
 
 # run inference through the network
 # and gather predictions from output layers
 outs = net.forward(get_output_layers(net))
-
 
 # initialization
 class_ids = []
@@ -107,7 +104,7 @@ indices = cv2.dnn.NMSBoxes(boxes, confidences, conf_threshold, nms_threshold)
 
 # go through the detections remaining
 # after nms and draw bounding box
-n_person = 0
+person_count = 0
 
 for i in indices:
     i = i[0]
@@ -118,7 +115,7 @@ for i in indices:
     h = box[3]
 
     if class_ids[i] == 0:
-        n_person += 1
+        person_count += 1
 
     # print(str(classes[class_ids[i]]))
 
@@ -133,16 +130,12 @@ for i in indices:
     )
 
 # display output image
-
-
-print(n_person)
-
+print(person_count)
 # lt.figure(figsize=(10, 8))
 plt.axis("off")
 plt.imshow(
     cv2.cvtColor(image, cv2.COLOR_BGR2RGB), interpolation="nearest", aspect="auto"
 )
-
 plt.savefig("T1.jpg")
 
 # cv2.imshow("object detection", image)
