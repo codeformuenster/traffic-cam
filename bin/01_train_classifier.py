@@ -2,19 +2,17 @@
 """ Train image classifier to distinguish camera positions. """
 
 import json
-
-from traffic_cam import classifier, paths
-
 import os
 
+from traffic_cam import classifier, paths
 
 # data generators for training and validation
 train_generator = classifier.get_image_datagen(folder=paths.TRAIN_DIR, batch_size=16)
 valid_generator = classifier.get_image_datagen(folder=paths.VALID_DIR, batch_size=16)
 
 # train model
-classes = os.listdir(paths.TRAIN_DIR)
-model = classifier.get_classifier(n_classes=len(classes))
+n_classes = len(os.listdir(paths.TRAIN_DIR))
+model = classifier.get_classifier(n_classes=n_classes)
 
 step_size_train = train_generator.n // train_generator.batch_size
 model.fit(
