@@ -11,7 +11,7 @@ from traffic_cam import classifier, paths
 
 SEED = 42
 VALIDATION_SPLIT = 0.3
-EPOCHS = 30
+EPOCHS = 13
 LEARNING_RATE = 0.0001
 
 # data generators for training and validation
