@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Download a user-defined number of images. """
 
-simport argparse
+import argparse
 import logging
 import shutil
 import time
@@ -43,7 +43,7 @@ logging.info(f"args.sleep: {args.sleep}")
 if not paths.CLASSIFIER_HDF5.exists():
     wget.download(
         url="https://github.com/codeformuenster/traffic-cam-data/blob/master/model/model.hdf5?raw=true",
-        out=str(paths.CLASSIFIER_HDF5)
+        out=str(paths.CLASSIFIER_HDF5),
     )
 model = load_model(str(paths.CLASSIFIER_HDF5))
 
