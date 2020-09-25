@@ -38,6 +38,8 @@ args = parser.parse_args()
 logging.info(f"args.n_images: {args.n_images}")
 logging.info(f"args.sleep: {args.sleep}")
 
+# prepare paths to write to
+paths.create_paths_if_not_exist()
 
 # download image classifier (if not exists), and load to memory
 if not paths.CLASSIFIER_HDF5.exists():
@@ -46,9 +48,6 @@ if not paths.CLASSIFIER_HDF5.exists():
         out=str(paths.CLASSIFIER_HDF5),
     )
 model = load_model(str(paths.CLASSIFIER_HDF5))
-
-# prepare paths to write to
-paths.create_paths_if_not_exist()
 
 # download and classify N images
 for i in range(args.n_images):
