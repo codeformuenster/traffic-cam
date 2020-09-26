@@ -102,19 +102,18 @@ indices = cv2.dnn.NMSBoxes(boxes, confidences, conf_threshold, nms_threshold)
 # after nms and draw bounding box
 person_count = 0
 
-for i in indices:
-    i = i[0]
+for i in indices.flatten():
+    # draw for persons only
+    if class_ids[i] != 0:
+        continue
+    # increment person count
+    person_count += 1
+    # draw bounding box
     box = boxes[i]
     x = box[0]
     y = box[1]
     w = box[2]
     h = box[3]
-
-    if class_ids[i] == 0:
-        person_count += 1
-
-    # print(str(classes[class_ids[i]]))
-
     draw_bounding_box(
         image,
         class_ids[i],
