@@ -153,4 +153,4 @@ class Predictor:
         plt.imshow(
             cv2.cvtColor(image, cv2.COLOR_BGR2RGB), interpolation="bicubic", aspect="auto"
         )
-        plt.savefig(paths.OUTPUT_DIR / image_path.name)
+        plt.savefig(paths.OUTPUT_DIR / image_path.name, dpi=200, bbox_inches='tight', figsize=(4, 4), pad_inches=0)
