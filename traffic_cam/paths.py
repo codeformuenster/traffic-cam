@@ -12,9 +12,9 @@ CLASSIFIER_HDF5 = CLASSIFIER_DIR / "model.hdf5"
 CLASSES_JSON = CLASSIFIER_DIR / "class_indices.json"
 
 # yolo
-YOLO_CFG = Path("darknet/cfg/yolov3.cfg")
 YOLO_WEIGHTS = Path("cfg/yolov3.weights")
-YOLO_CLASSES = Path("data/coco.names")
+YOLO_CFG = Path("traffic_cam/config/yolov3.cfg")
+YOLO_CLASSES = Path("traffic_cam/config/coco.names")
 
 # output
 OUTPUT_DIR = Path("output/")
