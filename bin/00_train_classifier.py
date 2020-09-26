@@ -15,7 +15,7 @@ EPOCHS = 13
 LEARNING_RATE = 0.0001
 
 # data generators for training and validation
-datagen = datagen = ImageDataGenerator(
+datagen = ImageDataGenerator(
     preprocessing_function=preprocess_input, validation_split=VALIDATION_SPLIT
 )
 train_generator = datagen.flow_from_directory(
@@ -42,7 +42,7 @@ valid_generator = datagen.flow_from_directory(
 
 # train model
 n_classes = len(os.listdir(paths.TRAIN_DIR))
-model = classifier.get_classifier(n_classes=n_classes, learning_rate=LEARNING_RATE)
+model = classifier.train_classifier_model(n_classes=n_classes, learning_rate=LEARNING_RATE)
 
 step_size_train = train_generator.n // train_generator.batch_size
 model.fit(
