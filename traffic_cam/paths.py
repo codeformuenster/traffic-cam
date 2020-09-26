@@ -19,6 +19,9 @@ YOLO_CLASSES = Path("data/coco.names")
 # output
 OUTPUT_DIR = Path("output/")
 
+# api
+CLASS_LOCATION = CLASSIFIER_DIR / "class_location.json"
+
 
 def create_paths_if_not_exist():
     """Create defined paths if they don't exist already, including parents."""
