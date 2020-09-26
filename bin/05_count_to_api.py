@@ -29,7 +29,7 @@ def loop(classifier_model, predictor_model):
         "timestamp": io.get_timestamp_isoformat(),
         "device_id": location,
         "data": {
-            "rain": "raining" if rain else "not raining",
+            "rain": rain,
         }
     }
     print(response)
