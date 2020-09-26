@@ -1,0 +1,17 @@
+[
+  {
+    "id": "north_street_petzhold",
+    "lat": 51.962077,
+    "lon": 7.628095
+  },
+  {
+    "id": "south_street_cityhall",
+    "lat": 51.961588,
+    "lon": 7.627814
+  },
+  {
+    "id": "south_street_klemensstr",
+    "lat": 51.961107,
+    "lon": 7.627567
+  }
+]
