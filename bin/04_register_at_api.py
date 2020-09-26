@@ -30,4 +30,4 @@ for location in locations:
         "https://counting-backend.codeformuenster.org/devices/",
         json=location,
     )
-    assert response.status_code == 201, "Reponse status code on insert not 201."
+    assert response.status_code == 201, "Response status code on insert not 201."
