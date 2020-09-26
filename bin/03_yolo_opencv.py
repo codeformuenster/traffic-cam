@@ -12,13 +12,15 @@ from traffic_cam import paths
 
 # read input image
 # TODO: download new image, within which to count people
-image_path = Path("data/train/south_street_cityhall/image_2020-09-10T07:43:44.868929+00:00.jpg")
+image_path = Path(
+    "data/train/south_street_cityhall/image_2020-09-10T07:43:44.868929+00:00.jpg"
+)
 image = cv2.imread(str(image_path))
 
 # dimensions of original images (for drawing bounding boxes)
 Width = image.shape[1]
 Height = image.shape[0]
-scale = 0.00392  # TODO: what does this parameter tune?
+scale = 1 / 255  # scaling to image values within [0, 1]
 
 # read class names from text file
 classes = None
@@ -32,7 +34,14 @@ COLORS = np.random.uniform(0, 255, size=(len(classes), 3))
 net = cv2.dnn.readNet(str(paths.YOLO_WEIGHTS), str(paths.YOLO_CFG))
 
 # load YOLO model
-blob = cv2.dnn.blobFromImage(image, scale, (416, 416), (0, 0, 0), True, crop=False)
+blob = cv2.dnn.blobFromImage(
+    image=image,
+    scalefactor=scale,
+    size=(416, 416),
+    mean=(0, 0, 0),
+    swapRB=True,
+    crop=False,
+)
 net.setInput(blob)
 
 
