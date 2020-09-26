@@ -48,6 +48,5 @@ if __name__ == "__main__":
         try:
             loop(classifier_model=cl, predictor_model=pr)
             sleep(10)
-            break
         except KeyboardInterrupt:
             print("Interrupted by user.")
