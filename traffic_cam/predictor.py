@@ -139,9 +139,9 @@ class Predictor:
         cv2.putText(img, label, (x - 10, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
     def plot_image(self, image, image_path):
-        # save image
+        """Plot and save image with bounding bogs."""
         plt.axis("off")
-        plt.imshow(
-            cv2.cvtColor(image, cv2.COLOR_BGR2RGB), interpolation="bicubic", aspect="auto"
-        )
+        fig = plt.figure(figsize=(12.8, 7.2))
+        fig.figimage(cv2.cvtColor(image, cv2.COLOR_BGR2RGB),)
+        plt.show()
         plt.savefig(paths.OUTPUT_DIR / image_path.name)
