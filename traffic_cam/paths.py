@@ -21,6 +21,7 @@ OUTPUT_DIR = Path("output/")
 
 # api
 CLASS_LOCATION = CLASSIFIER_DIR / "class_location.json"
+API_URL = "https://counting-backend.codeformuenster.org"
 
 
 def create_paths_if_not_exist():
