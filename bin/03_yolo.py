@@ -4,7 +4,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
-IMG_PATH = Path("data/valid/3/shot0004.jpg")
+IMG_PATH = Path("data/image_2020-09-25T10:11:10.353738+00:00.jpg")
+
 YOLO_CMD = [
     "./darknet/darknet",
     "detect",

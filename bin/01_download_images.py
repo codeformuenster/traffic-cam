@@ -38,7 +38,6 @@ args = parser.parse_args()
 logging.info(f"args.n_images: {args.n_images}")
 logging.info(f"args.sleep: {args.sleep}")
 
-
 # prepare paths to write to
 paths.create_paths_if_not_exist()
 
