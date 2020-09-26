@@ -1,4 +1,4 @@
-""" Count persons on Prinzipalmarkt and publish to API. """
+"""Count persons on Prinzipalmarkt and publish to API. """
 
 import requests
 from traffic_cam import classifier, io, predictor, paths
