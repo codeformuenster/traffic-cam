@@ -18,7 +18,7 @@ def loop(classifier_model, predictor_model):
         return False
 
     # count persons on image
-    persons = predictor_model.predict_image(image_path=paths.TRAIN_DIR / location / path.name, plot=True)
+    persons = predictor_model.predict_image(image_path=paths.TRAIN_DIR / location / path.name, plot=False)
 
     # collect additional information for API
     rain = True  # 90 % accuracy for Münster, good enough
