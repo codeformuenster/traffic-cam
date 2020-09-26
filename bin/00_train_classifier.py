@@ -11,6 +11,8 @@ from traffic_cam import classifier, paths
 
 SEED = 42
 VALIDATION_SPLIT = 0.3
+EPOCHS = 13
+LEARNING_RATE = 0.0001
 
 # data generators for training and validation
 datagen = datagen = ImageDataGenerator(
@@ -28,6 +30,7 @@ train_generator = datagen.flow_from_directory(
 )
 valid_generator = datagen.flow_from_directory(
     paths.TRAIN_DIR,
+    seed=SEED,
     target_size=(224, 224),
     color_mode="rgb",
     batch_size=16,
@@ -39,13 +42,13 @@ valid_generator = datagen.flow_from_directory(
 
 # train model
 n_classes = len(os.listdir(paths.TRAIN_DIR))
-model = classifier.get_classifier(n_classes=n_classes)
+model = classifier.get_classifier(n_classes=n_classes, learning_rate=LEARNING_RATE)
 
 step_size_train = train_generator.n // train_generator.batch_size
 model.fit(
     x=train_generator,
     steps_per_epoch=step_size_train,
-    epochs=10,
+    epochs=EPOCHS,
     validation_data=next(valid_generator),
 )
 
