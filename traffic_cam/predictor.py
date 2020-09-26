@@ -19,11 +19,11 @@ class Predictor:
 
         # Check if the YOLO weights and cfg was downloaded
         if not paths.YOLO_WEIGHTS.is_file():
-            print("Download YOLO Weights")
+            print("YOLO Weights missing")
             raise FileNotFoundError()
 
         if not paths.YOLO_CFG.is_file():
-            print("Download YOLO CFG")
+            print("YOLO CFG missing")
             raise FileNotFoundError()
 
         # read pre-trained model and config file
