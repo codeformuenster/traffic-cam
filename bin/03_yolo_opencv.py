@@ -28,7 +28,10 @@ class YoloOpencv:
         # scaling to image values within [0, 1]
         self.scale = 1 / 255
 
-    def predict_image(self, image_path: Path, plot: bool = False) -> dict:
+    def predict_image(self, image_path: Path, plot: bool = False) -> int:
+        if not image_path.is_file():
+            raise FileNotFoundError()
+
         # read input image
         image = cv2.imread(str(image_path))
 
@@ -108,8 +111,10 @@ class YoloOpencv:
 
         print(f"Number on persons: {person_count}")
 
-        if plot == True:
+        if plot is True:
             self.plot_image(image)
+
+        return person_count
 
     def get_output_layers(self, net):
         """get the output layer names in the architecture
@@ -150,10 +155,36 @@ class YoloOpencv:
 if __name__ == "__main__":
     try:
         predictor = YoloOpencv()
-        image_path = Path(
-            "data/train/south_street_cityhall/image_2020-09-10T07:43:44.868929+00:00.jpg"
-        )
-        predictor.predict_image(image_path=image_path, plot=True)
-        # plot_image()
+
+        images = {
+            "image_2020-09-09T20:13:29.985893+00:00s": 1,
+            "image_2020-09-10T07:58:06.167747+00:00": 4,
+            "image_2020-09-25T12:51:31.666045+00:00": 15,
+            "image_2020-09-25T12:51:52.302745+00:00": 23,
+            "image_2020-09-25T12:52:08.598229+00:00": 24,
+            "image_2020-09-25T12:55:24.172202+00:00": 23,
+            "image_2020-09-25T13:59:54.823420+00:00": 34,
+            "image_2020-09-25T14:00:11.859519+00:00": 22,
+            "image_2020-09-25T14:00:28.696451+00:00": 25,
+            "image_2020-09-25T14:03:33.700749+00:00": 29,
+        }
+
+        squares = []
+        for image, reference in images.items():
+            print(f"Predicting {image} with {reference} people in it...")
+            image_path = Path(
+                f"data/train/north_street_petzhold/{image}.jpg"
+            )
+            try:
+                prediction = predictor.predict_image(image_path=image_path, plot=True)
+            except FileNotFoundError:
+                print("File not found, skipping")
+                continue
+            error = reference - prediction
+            print(f"Prediction error: {error}")
+            squares += [error ** 2]
+
+        nrmsd = np.mean(squares) ** 0.5 / sum(images.values())
+        print(f"nrmsd: {nrmsd*100} %")
     except KeyboardInterrupt:
         print("Interrupted by user.")
