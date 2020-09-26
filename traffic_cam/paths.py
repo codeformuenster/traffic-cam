@@ -29,3 +29,4 @@ def create_paths_if_not_exist():
     TRAIN_DIR.mkdir(parents=True, exist_ok=True)
 
     CLASSIFIER_DIR.mkdir(parents=True, exist_ok=True)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
