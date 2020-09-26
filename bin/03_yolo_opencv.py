@@ -129,8 +129,7 @@ print(f"Number on persons: {person_count}")
 
 # save image
 plt.axis("off")
-# TODO: use better interpolation
 plt.imshow(
-    cv2.cvtColor(image, cv2.COLOR_BGR2RGB), interpolation="nearest", aspect="auto"
+    cv2.cvtColor(image, cv2.COLOR_BGR2RGB), interpolation="bicubic", aspect="auto"
 )
 plt.savefig(paths.OUTPUT_DIR / image_path.name)
