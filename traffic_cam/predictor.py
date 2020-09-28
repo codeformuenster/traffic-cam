@@ -15,7 +15,7 @@ class Predictor:
             self.classes = [line.strip() for line in f.readlines()]
 
         # generate different colors for different classes
-        self.colors = np.random.uniform(0, 255, size=(len(self.classes), 3))
+        self.colors = np.random.uniform(255, 255, size=(len(self.classes), 3))
 
         # read pre-trained model and config file
         self.net = cv2.dnn.readNet(str(paths.YOLO_WEIGHTS), str(paths.YOLO_CFG))
@@ -142,6 +142,6 @@ class Predictor:
         """Plot and save image with bounding bogs."""
         plt.axis("off")
         fig = plt.figure(figsize=(12.8, 7.2))
-        fig.figimage(cv2.cvtColor(image, cv2.COLOR_BGR2RGB),)
+        fig.figimage(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
         plt.show()
         plt.savefig(paths.OUTPUT_DIR / image_path.name)
