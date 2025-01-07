@@ -17,6 +17,15 @@ class Predictor:
         # generate different colors for different classes
         self.colors = np.random.uniform(255, 255, size=(len(self.classes), 3))
 
+        # Check if the YOLO weights and cfg was downloaded
+        if not paths.YOLO_WEIGHTS.is_file():
+            print("YOLO Weights missing")
+            raise FileNotFoundError()
+
+        if not paths.YOLO_CFG.is_file():
+            print("YOLO CFG missing")
+            raise FileNotFoundError()
+
         # read pre-trained model and config file
         self.net = cv2.dnn.readNet(str(paths.YOLO_WEIGHTS), str(paths.YOLO_CFG))
 
