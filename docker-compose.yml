@@ -1,0 +1,13 @@
+version: '3.0'
+
+services:
+
+  traffic_cam:
+    build: .
+    image: traffic_cam
+    command: python -u bin/05_count_to_api.py
+    volumes:
+      - .:/app
+    restart: on-failure
+    environment:
+      - IS_DOCKER_COMPOSE=1
